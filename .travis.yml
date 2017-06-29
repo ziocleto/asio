@@ -1,19 +1,23 @@
 language: cpp
 sudo: false
 
-addons:
-  apt:
-    packages:
-      - g++-6
-
 matrix:
   include:
     - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-6
       env:
-        - CXX="g++-6"
         - CXXFLAGS="-Wall -Wextra -O2"
         - CONFIGFLAGS="--with-boost=no --enable-separate-compilation"
+        - MATRIX_EVAL="CC=gcc-6 CXX=g++-6"
       compiler: gcc
+
+before_install:
+  - eval "${MATRIX_EVAL}"
 
 script:
   - cd asio && ./autogen.sh && ./configure $CONFIGFLAGS && make
