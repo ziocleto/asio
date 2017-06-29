@@ -1,3 +1,5 @@
+version: "{branch} (#{build})"
+
 image:
   - Visual Studio 2015
 
@@ -6,6 +8,10 @@ environment:
     - DEBUG: 1
       STANDALONE: 1
       WARNINGS: 1
+    - DEBUG: 1
+      STANDALONE: 1
+      WARNINGS: 1
+      WIN9X: 1
 
 build_script:
   - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
