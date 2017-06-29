@@ -1,6 +1,10 @@
 language: cpp
 sudo: false
 
+cache:
+  directories:
+    - ${TRAVIS_BUILD_DIR}/boost_1_64_0
+
 matrix:
   include:
     #
@@ -33,9 +37,34 @@ matrix:
         - CONFIGFLAGS="--with-boost=no"
         - MATRIX_EVAL="CC=gcc-6 CXX=g++-6"
       compiler: gcc
+    #
+    # Linux / g++-6 / -O0 / boost 1.64 / separate compilation
+    #
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-6
+      env:
+        - BOOST_DIR="boost_1_64_0"
+        - BOOST_URL="https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.bz2"
+        - CXXFLAGS="-Wall -Wextra -O0 -fno-inline"
+        - CONFIGFLAGS="--enable-separate-compilation"
+        - MATRIX_EVAL="CC=gcc-6 CXX=g++-6"
+      compiler: gcc
 
 before_install:
   - eval "${MATRIX_EVAL}"
+
+install:
+  - |
+    if [[ "${BOOST_URL}" != "" ]]; then
+      if [[ -z "$(ls -A ${BOOST_DIR})" ]]; then
+        { travis_retry wget --quiet -O - ${BOOST_URL} | tar -x; } || exit 1
+      fi
+    fi
 
 script:
   - cd asio && ./autogen.sh && ./configure $CONFIGFLAGS && make && make check
