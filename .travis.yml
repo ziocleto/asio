@@ -20,7 +20,7 @@ before_install:
   - eval "${MATRIX_EVAL}"
 
 script:
-  - cd asio && ./autogen.sh && ./configure $CONFIGFLAGS && make
+  - cd asio && ./autogen.sh && ./configure $CONFIGFLAGS && make && make check
 
 notifications:
   email: false
