@@ -1,0 +1,22 @@
+language: cpp
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - g++-6
+
+matrix:
+  include:
+    - os: linux
+      env:
+        - CXX="g++-6"
+        - CXXFLAGS="-Wall -Wextra -O2"
+        - CONFIGFLAGS="--with-boost=no --enable-separate-compilation"
+      compiler: gcc
+
+script:
+  - cd asio && ./configure $CONFIGFLAGS && make
+
+notifications:
+  email: false
