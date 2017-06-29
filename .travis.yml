@@ -16,7 +16,7 @@ matrix:
       compiler: gcc
 
 script:
-  - cd asio && ./configure $CONFIGFLAGS && make
+  - cd asio && ./autogen.sh && ./configure $CONFIGFLAGS && make
 
 notifications:
   email: false
