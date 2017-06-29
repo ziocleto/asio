@@ -62,7 +62,7 @@ install:
   - |
     if [[ "${BOOST_URL}" != "" ]]; then
       if [[ -z "$(ls -A ${BOOST_DIR})" ]]; then
-        { travis_retry wget --quiet -O - ${BOOST_URL} | tar -x; } || exit 1
+        { travis_retry wget --quiet -O - ${BOOST_URL} | tar -xj; } || exit 1
       fi
     fi
 
