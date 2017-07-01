@@ -8,6 +8,10 @@ cache:
 matrix:
   include:
     #
+    #---------------------------------------------------------------------------
+    # Linux / g++-6
+    #---------------------------------------------------------------------------
+    #
     # Linux / g++-6 / -O2 / standalone
     #
     - os: linux
@@ -149,6 +153,78 @@ matrix:
         - MATRIX_EVAL="CC=gcc-6 CXX=g++-6"
       compiler: gcc
     #
+    #---------------------------------------------------------------------------
+    # Linux / g++-4.8
+    #---------------------------------------------------------------------------
+    #
+    # Linux / g++-4.8 / -O2 / standalone
+    #
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.8
+      env:
+        - CXXFLAGS="-Wall -Wextra -O2"
+        - CONFIGFLAGS="--with-boost=no"
+        - MATRIX_EVAL="CC=gcc-4.8 CXX=g++-4.8"
+      compiler: gcc
+    #
+    # Linux / g++-4.8 / -O0 / standalone / separate compilation
+    #
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.8
+      env:
+        - CXXFLAGS="-Wall -Wextra -O0 -fno-inline"
+        - CONFIGFLAGS="--with-boost=no --enable-separate-compilation"
+        - MATRIX_EVAL="CC=gcc-4.8 CXX=g++-4.8"
+      compiler: gcc
+    #
+    # Linux / g++-4.8 / -O2 / boost 1.64
+    #
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.8
+      env:
+        - BOOST_DIR="boost_1_64_0"
+        - BOOST_URL="https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.bz2"
+        - CXXFLAGS="-Wall -Wextra -O2"
+        - CONFIGFLAGS=""
+        - MATRIX_EVAL="CC=gcc-4.8 CXX=g++-4.8"
+      compiler: gcc
+    #
+    # Linux / g++-4.8 -std=c++11 / -O2 / boost 1.64
+    #
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.8
+      env:
+        - BOOST_DIR="boost_1_64_0"
+        - BOOST_URL="https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.bz2"
+        - CXXFLAGS="-std=c++11 -Wall -Wextra -O2"
+        - CONFIGFLAGS=""
+        - MATRIX_EVAL="CC=gcc-4.8 CXX=g++-4.8"
+      compiler: gcc
+    #
+    #---------------------------------------------------------------------------
+    # Linux / clang-3.8
+    #---------------------------------------------------------------------------
+    #
     # Linux / clang-3.8 / -O2 / standalone"
     #
     - os: linux
@@ -180,6 +256,10 @@ matrix:
         - CONFIGFLAGS="--with-boost=no --enable-separate-compilation"
         - MATRIX_EVAL="CC=clang-3.8 CXX=clang++-3.8"
       compiler: clang
+    #
+    #---------------------------------------------------------------------------
+    # macOS / xcode8
+    #---------------------------------------------------------------------------
     #
     # macOS / xcode8 / -O2 / standalone
     #
