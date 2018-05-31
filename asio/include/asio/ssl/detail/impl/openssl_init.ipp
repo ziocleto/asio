@@ -79,7 +79,7 @@ public:
     ::ERR_remove_thread_state(NULL);
 #endif // (OPENSSL_VERSION_NUMBER < 0x10000000L)
 #if (OPENSSL_VERSION_NUMBER >= 0x10002000L) \
-    && (OPENSSL_VERSION_NUMBER < 0x10100000L) \
+    && (OPENSSL_VERSION_NUMBER < 0x10002007L) \
     && !defined(SSL_OP_NO_COMPRESSION)
     ::SSL_COMP_free_compression_methods();
 #endif // (OPENSSL_VERSION_NUMBER >= 0x10002000L)
