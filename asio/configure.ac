@@ -178,8 +178,4 @@ AM_CONDITIONAL(HAVE_CXX14,test x$HAVE_CXX14 = xyes)
 AC_OUTPUT([
   Makefile
   include/Makefile
-  src/Makefile
-  src/tests/Makefile
-  src/examples/cpp03/Makefile
-  src/examples/cpp11/Makefile
-  src/examples/cpp14/Makefile])
+  src/Makefile])
